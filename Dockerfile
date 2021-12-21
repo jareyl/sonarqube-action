@@ -16,6 +16,15 @@ RUN npm config set unsafe-perm true && \
   apk add --no-cache ca-certificates jq
 
 ENV NODE_PATH "/usr/lib/node_modules/"
+ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
+ENV HOME="/tmp"
+ENV XDG_CONFIG_HOME="/tmp"
+ENV SONAR_SCANNER_HOME="/opt/sonar-scanner"
+ENV SONAR_USER_HOME="/opt/sonar-scanner/.sonar"
+ENV PATH="/opt/java/openjdk/bin:/opt/sonar-scanner/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ENV SRC_PATH="/usr/src"
+ENV LANG="en_US.UTF-8"
+ENV LC_ALL="en_US.UTF-8"
 
 COPY entrypoint.sh /entrypoint.sh
 
