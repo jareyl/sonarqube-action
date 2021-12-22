@@ -14,6 +14,12 @@ REPOSITORY_NAME=$(basename "${GITHUB_REPOSITORY}")
 
 [[ ! -z ${INPUT_PASSWORD} ]] && SONAR_PASSWORD="${INPUT_PASSWORD}" || SONAR_PASSWORD=""
 
+#Debug output JAVA_HOME
+echo "Java home: $JAVA_HOME"
+JAVA_HOME=/opt/sonar-scanner/jre/bin/java
+
+find ${INPUT_PROJECTBASEDIR} -type f | cat
+
 if [[ ! -f "${GITHUB_WORKSPACE}/sonar-project.properties" ]]; then
   [[ -z ${INPUT_PROJECTKEY} ]] && SONAR_PROJECTKEY="${REPOSITORY_NAME}" || SONAR_PROJECTKEY="${INPUT_PROJECTKEY}"
   [[ -z ${INPUT_PROJECTNAME} ]] && SONAR_PROJECTNAME="${REPOSITORY_NAME}" || SONAR_PROJECTNAME="${INPUT_PROJECTNAME}"
