@@ -16,9 +16,29 @@ REPOSITORY_NAME=$(basename "${GITHUB_REPOSITORY}")
 
 #Debug output JAVA_HOME
 echo "Java home: $JAVA_HOME"
-JAVA_HOME=/opt/sonar-scanner/jre/bin/java
+export JAVA_HOME=/opt/sonar-scanner/jre/bin/java
 
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk"
+export HOME="/tmp"
+export  XDG_CONFIG_HOME="/tmp"
+export SONAR_SCANNER_HOME="/opt/sonar-scanner"
+export SONAR_USER_HOME="/opt/sonar-scanner/.sonar"
+export PATH="/opt/java/openjdk/bin:/opt/sonar-scanner/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+echo "Java home after change: $JAVA_HOME"
+
+echo "Project path content:"
 find ${INPUT_PROJECTBASEDIR} -type f | cat
+
+echo "Verifying java version in use:"
+wich java | cat
+
+echo "Verifying installation of sonar-scanner:"
+ls /opt/sonar-scanner/jre/bin/ | cat
+
+#chmode 755 /opt/sonar-scanner/jre/bin/java
+#echo "Creating symbolic link to sonar-scanner java distibution"
+#ln -s /usr/bin/java /opt/sonar-scanner/jre/bin/java
+
 
 if [[ ! -f "${GITHUB_WORKSPACE}/sonar-project.properties" ]]; then
   [[ -z ${INPUT_PROJECTKEY} ]] && SONAR_PROJECTKEY="${REPOSITORY_NAME}" || SONAR_PROJECTKEY="${INPUT_PROJECTKEY}"
